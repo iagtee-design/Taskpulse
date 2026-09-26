@@ -1,28 +1,45 @@
-# Taskpulse
-Taskpulse is an academic tracker that helps students prioritize activities, flags task due 24 hours and creates optimal study blocks
+## I. Project Title
+**Taskpulse**  
+*An academic tracker that helps students prioritize activities, flags tasks due within 24 hours, and creates optimal study blocks.*
 
-With many ways of doing activities and tasks in this current world, students are overwhelmed with assessments that could hurt them mentally and drain them physically. Even though their were solutions like manual planners they are tedious to maintain. This problem not just affects highschoolers but can also affect students until college who have many workload. Solving this problem can reduce anxiety and stop bad habits like cramming. 
+---
 
-By the end of the development we are looking to finish these objectives
-1. Urgency characterization: Automatically tags activities due in 24 hours as required immediately while other are put into standard levels (low, medium, high)  .
-2. Time block: Generates a daily study schedule dedicated to required activities due in a nearing period.
-3. Completion Tracking: Provides visual progress that shows the percentage of completed tasks
+## II. Problem Statement
+With many ways of doing activities and tasks in this current world, students are overwhelmed with assessments that could hurt them mentally and drain them physically. Even though there are solutions like manual planners, they are tedious to maintain. This problem not only affects high schoolers but can also affect students until college who have heavy workloads. Solving this problem can reduce anxiety and stop bad habits like cramming.
 
+---
 
-For our planned features we wish to be able to
-1.Characterize tasks based on urgency
-2.Automated Time-Block Generator
-3.Visual Progress Tracker
+## III. Project Objectives
+By the end of the first quarter, I aim to achieve the following objectives for Taskpulse:
+* **Urgency Characterization Module:** Program a backend classification logic that automatically scans a user's task list and tags 100% of items due within 24 hours as "REQUIRED IMMEDIATELY" while sorting remaining tasks into accurate priority buckets (Low, Medium, High).
+* **Automated Study-Block Generator:** Design a scheduling algorithm that filters tasks labeled "REQUIRED IMMEDIATELY," sorts them chronologically by due date, and dynamically outputs a structured daily study roadmap for the user.
+* **Completion Progress Tracker:** Implement a real-time visual progress monitoring system that accurately calculates the percentage of finished assignments against total active tasks using the formula: `(completed_count / total_count) * 100`.
 
-Desired Inputes
-1. Task Submission Data: The task, the title, the course, the subject and the due date of the task.
-2. Completion Checkmark: The student marks a specific task as finished or completed
+---
 
-Desired Outputs
-1. Urgent Task visual Indicator: Displays tasks that are due in 24 hours and flags them with urgent text such as Required Immediately.
-2. Structured Study Routine: A daily schedule that outlines what needs to be done or reviewed
-3. Visual Progress : A display reflecting on academic requirements finished
+## IV. Planned Features
+1. **Characterize Tasks Based on Urgency:** Automatically categorizes assignments based on remaining time.
+2. **Automated Time-Block Generator:** Dynamically creates a focused daily study schedule around critical deadlines.
+3. **Visual Progress Tracker:** Displays a calculated overview of completion statistics to maintain academic momentum.
 
+---
+
+## V. Planned Inputs and Outputs
+
+### Desired Inputs
+* **Task Submission Data:** The task title, the course/subject, and the explicit due date of the task.
+* **Completion Checkmark:** A user action to flag a specific task record as finished or completed.
+
+### Desired Outputs
+* **Urgent Task Visual Indicator:** Displays tasks that are due in 24 hours and flags them prominently with a "REQUIRED IMMEDIATELY" status indicator.
+* **Structured Study Routine:** A customized daily roadmap outlining precisely what needs to be reviewed or completed.
+* **Visual Progress Bar:** A graphical dashboard interface showing the numerical percentage of completed requirements.
+
+---
+
+## VI. Logic Plan (Pseudocode)
+
+```text
 Start
     // STEP 1: Initialization
     INITIALIZE task_database AS Empty List
@@ -37,45 +54,43 @@ Start
             
             IF time_remaining <= 24 hours AND task.status != "Completed":
                 Set task.priority_level = "REQUIRED IMMEDIATELY"
-             
-              Else IF time_remaining > 24 hours AND time_remaining <= 72 hours:
-        SET task.priority_level = "Medium Level"
-        
-    ELSE:
-        SET task.priority_level = "Low Level"
+            ELSE IF time_remaining > 24 hours AND time_remaining <= 72 hours:
+                Set task.priority_level = "Medium Level"
+            ELSE:
+                Set task.priority_level = "Low Level"
             ENDIF
         ENDFOR
         
         // FEATURE 3 LOGIC: Completion Tracking
-        SET total_count = COUNT ALL ITEMS IN task_database
-        SET completed_count = COUNT ITEMS IN task_database WHERE task.status == "Completed"
+        Set total_count = COUNT ALL ITEMS IN task_database
+        Set completed_count = COUNT ITEMS IN task_database WHERE task.status == "Completed"
         
         IF total_count > 0:
-            CALCULATE visual_percentage = (completed_count / total_count) * 100
+            Calculate visual_percentage = (completed_count / total_count) * 100
         ELSE:
             SET visual_percentage = 0
         ENDIF
         
-        DISPLAY visual_percentage ON Progress Bar Interface
-        DISPLAY Triage Dashboard (Urgent vs Standard Tasks)
+        Display visual_percentage ON Progress Bar Interface
+        Display Triage Dashboard (Urgent vs Standard Tasks)
         
         // STEP 3: Handle Planned Input Actions
         IF User selects "Create Task":
-            INPUT user_task_title, user_subject, user_due_date
-            CREATE new_task_record with status = "Pending"
-            SAVE new_task_record TO task_database
+            Input user_task_title, user_subject, user_due_date
+            Create new_task_record with status = "Pending"
+            Save new_task_record TO task_database
             
         ELSE IF User selects "Mark Task Completed":
-            UPDATE target_task.status = "Completed"
+            Update target_task.status = "Completed"
             
         // FEATURE 2 LOGIC: Study Block Generation
         ELSE IF User selects "Generate Study Blocks":
-            FILTER task_database TO CREATE urgent_schedule_queue WHERE task.priority_level == "CRITICAL / REQUIRED IMMEDIATELY"
+            Filter task_database TO Create urgent_schedule_queue WHERE task.priority_level == "REQUIRED IMMEDIATELY"
             SORT urgent_schedule_queue BY due_date ASCENDING
             
-            DISPLAY "--- GENERATED STUDY BLOCKS FOR NEARING PERIOD ---"
+            DISPLAY " GENERATED STUDY BLOCKS FOR NEARING PERIOD "
             IF urgent_schedule_queue IS EMPTY:
-                DISPLAY "No urgent tasks due within 24 hours. Your schedule is clear!"
+                Display "No tasks required in 24 hours. This day's schedule is clear!"
             ELSE:
                 FOR EACH urgent_item IN urgent_schedule_queue:
                     DISPLAY "[Dedicated Study Block] Focus on Assignment: " + urgent_item.user_task_title + " (" + urgent_item.user_subject + ")"
@@ -84,5 +99,4 @@ Start
         ENDIF
         
     ENDWHILE
-
-END Taskpulse Program
+Isaiah Antonio G. Tee 8 - Ilang -Ilang
